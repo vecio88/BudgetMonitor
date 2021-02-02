@@ -1,0 +1,36 @@
+# ==============================================================
+# = Articoli Web Service - Versione Base
+# ==============================================================
+
+server:
+  port: 5050
+
+spring:
+  application:
+    name: GestoreDiSpese
+
+# ==============================================================
+# = DBMS PostgreSQL Parameters
+# ==============================================================
+  datasource:
+    initialization-mode: always
+    password: admin
+    platform: mysql
+    url: jdbc:mysql://localhost:3306/BudgetMonitor
+    username: root
+  jpa:
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+        show_sql: true
+        format_sql: true
+        jdbc:
+          lob:
+            non_contextual_creation: true
+logging:
+  level:
+    org:
+      hibernate:
+        type: trace    
