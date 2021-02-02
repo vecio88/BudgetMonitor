@@ -8,6 +8,7 @@ import javax.validation.constraints.Size;
 import lombok.Data;
 import michele.piazzolla.GestoreDiSpese.Entities.Account;
 import michele.piazzolla.GestoreDiSpese.Entities.MovementCategory;
+import michele.piazzolla.GestoreDiSpese.Entities.MovementSubCategory;
 
 @Data
 public class MovementDTO {
@@ -21,7 +22,7 @@ public class MovementDTO {
 	private Account account;
 	
 	@NotNull(message = "{NotNull.MovementDTO.movementCategory.Validation}")
-	private MovementCategory movementCategory;
+	private MovementSubCategory movementCategory;
 	
 	@Size(min = 0, max = 1000, message = "{Size.MovementDTO.causal.Validation}")
 	private String causal;

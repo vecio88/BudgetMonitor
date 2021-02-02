@@ -22,7 +22,7 @@ public class MovementDTOConverter {
 		dto.setMovementAmount(movement.getMovementAmount());
 		dto.setCausal(movement.getCausal());
 		dto.setAccount(movement.getAccount());
-		dto.setMovementCategory(movement.getMovementCategory());
+		dto.setMovementCategory(movement.getMovementSubCategory());
 		dto.setTypeOfMovement(movement.getTypeOfMovement());
 		
 		return dto;
@@ -45,7 +45,7 @@ public class MovementDTOConverter {
 		Movement movement = new Movement();
 
 		movement.setAccount(movimentoDTO.getAccount());
-		movement.setMovementCategory(movimentoDTO.getMovementCategory());
+		movement.setMovementSubCategory(movimentoDTO.getMovementCategory());
 		movement.setCausal(movimentoDTO.getCausal());
 		movement.setDateMovement(Utility.stringToLocalDateTime(movimentoDTO.getDatetimeMovement()).toLocalDate());
 		movement.setTypeOfMovement(movimentoDTO.getTypeOfMovement());

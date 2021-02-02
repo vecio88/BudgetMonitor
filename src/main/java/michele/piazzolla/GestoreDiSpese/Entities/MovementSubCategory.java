@@ -18,11 +18,22 @@ import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Table(name="sottocategorie")
-@Data
+@Builder
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class MovementSubCategory {
 	
 	@Id
@@ -50,9 +61,10 @@ public class MovementSubCategory {
 	@Column(name ="dt_modify")
 	private Date dtModify;
 	
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL,  
-	mappedBy = "movementCategory", orphanRemoval = true)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "movementSubCategory")
 	@JsonBackReference
+	@EqualsAndHashCode.Exclude
+	@ToString.Exclude
 	private Set<Movement> movements = new HashSet<>();
 
 }

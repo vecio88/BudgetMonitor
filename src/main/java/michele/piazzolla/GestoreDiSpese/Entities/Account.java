@@ -1,5 +1,6 @@
 package michele.piazzolla.GestoreDiSpese.Entities;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -18,13 +19,26 @@ import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Table(name="conti")
-@Data
-public class Account {
-	
+@Builder
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+public class Account  implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@Column(name = "id")
 	private int idAccount;
@@ -33,8 +47,9 @@ public class Account {
 	private String label;
 	
 	@ManyToOne
+	// @EqualsAndHashCode.Exclude
 	@JoinColumn(name = "id_banca", referencedColumnName = "id")
-	private Bank idBank;
+	private Bank bank;
 	
 	@ManyToOne
 	@JoinColumn(name = "id_utente", referencedColumnName = "id")
@@ -54,9 +69,10 @@ public class Account {
 	@Column(name ="dt_modify")
 	private Date dtModify;
 	
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL,  
-			mappedBy = "account", orphanRemoval = true)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "account")
 	@JsonBackReference
+	@EqualsAndHashCode.Exclude
+	@ToString.Exclude
 	private Set<Movement> movements = new HashSet<>();
-
+	
 }

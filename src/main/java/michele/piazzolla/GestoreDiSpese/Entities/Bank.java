@@ -1,5 +1,7 @@
 package michele.piazzolla.GestoreDiSpese.Entities;
 
+import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -14,15 +16,31 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Table(name="banche")
-@Data
-public class Bank {
-	
+@Builder
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+public class Bank implements Serializable{
+
+	private static final long serialVersionUID = 2781965446983906005L;
+
 	@Id
 	@Column(name = "id")
 	private int idBank;
@@ -39,17 +57,15 @@ public class Bank {
 	@Column(name ="user_modify")
 	private int idUserModify;
 	
-	@Temporal(TemporalType.DATE)
 	@Column(name ="dt_insert")
-	private Date dtInsert;
+	private LocalDateTime dtInsert;
 	
-	@Temporal(TemporalType.DATE)
 	@Column(name ="dt_modify")
-	private Date dtModify;
+	private LocalDateTime dtModify;
 	
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL,  
-			mappedBy = "idBank", orphanRemoval = true)
-	@JsonBackReference
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "bank")
+	@EqualsAndHashCode.Exclude
+	@ToString.Exclude
 	private Set<Account> accounts = new HashSet<>();
-
+	
 }

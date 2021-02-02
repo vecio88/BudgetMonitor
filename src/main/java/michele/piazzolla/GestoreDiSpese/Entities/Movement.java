@@ -3,7 +3,6 @@ package michele.piazzolla.GestoreDiSpese.Entities;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,11 +12,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
+import lombok.EqualsAndHashCode;
+
+
 
 
 @Entity
@@ -46,7 +47,7 @@ public class Movement implements Serializable {
 	
 	@ManyToOne
 	@JoinColumn(name = "id_sottocategoria", referencedColumnName = "id")
-	private MovementCategory movementCategory;
+	private MovementSubCategory movementSubCategory;
 	
 	@Column(name ="causale")
 	private String causal;
@@ -67,14 +68,12 @@ public class Movement implements Serializable {
 	@Column(name ="user_modify")
 	private int idUserModify;
 	
-	// @Temporal(TemporalType.DATE)
 	@Column(name ="dt_insert")
 	private LocalDateTime dtInsert;
-	
-	// @Temporal(TemporalType.DATE)
+
 	@Column(name ="dt_modify")
 	private LocalDateTime dtModify;
-	
+
 	public int getIdMovement() {
 		return idMovement;
 	}
@@ -107,12 +106,12 @@ public class Movement implements Serializable {
 		this.account = account;
 	}
 
-	public MovementCategory getMovementCategory() {
-		return movementCategory;
+	public MovementSubCategory getMovementSubCategory() {
+		return movementSubCategory;
 	}
 
-	public void setMovementCategory(MovementCategory movementCategory) {
-		this.movementCategory = movementCategory;
+	public void setMovementSubCategory(MovementSubCategory movementSubCategory) {
+		this.movementSubCategory = movementSubCategory;
 	}
 
 	public String getCausal() {
@@ -179,4 +178,9 @@ public class Movement implements Serializable {
 		this.dtModify = dtModify;
 	}
 
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+	
+	
 }

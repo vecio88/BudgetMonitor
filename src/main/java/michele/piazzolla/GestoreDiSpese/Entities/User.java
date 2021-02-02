@@ -1,5 +1,6 @@
 package michele.piazzolla.GestoreDiSpese.Entities;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -16,13 +17,26 @@ import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Table(name="utenti")
-@Data
-public class User {
+@Builder
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+public class User  implements Serializable {
 	
+	private static final long serialVersionUID = 3356785768854212238L;
+
 	@Id
 	@Column(name = "id")
 	private int idUser;
@@ -56,9 +70,11 @@ public class User {
 	@Column(name ="dt_modify")
 	private Date dtModify;
 	
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL,  
-			mappedBy = "owner", orphanRemoval = true)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "owner")
 	@JsonBackReference
+	@EqualsAndHashCode.Exclude
+	@ToString.Exclude
 	private Set<Account> accounts = new HashSet<>();
 
+	
 }

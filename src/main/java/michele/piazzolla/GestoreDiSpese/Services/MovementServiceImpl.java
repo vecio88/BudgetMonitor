@@ -25,9 +25,9 @@ public class MovementServiceImpl implements MovementService {
 		return movementRepo.findAll();
 	}
 
+	
 	@Override
-	public Movement selectAnMovement(int id) {
-		// passare l'ID
+	public Movement selectAnMovementById(int id) {
 		return movementRepo.findByIdMovement(id);
 	}
 

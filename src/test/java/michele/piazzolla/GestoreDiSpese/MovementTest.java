@@ -17,7 +17,7 @@ import michele.piazzolla.GestoreDiSpese.Repositories.MovementRepository;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-class MovementTest {
+public class MovementTest {
 	
 	@Autowired
 	private MovementRepository movementRepo;

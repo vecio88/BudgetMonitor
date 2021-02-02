@@ -10,7 +10,7 @@ public interface MovementService {
 	
 	public List<Movement> selectAllMovement();
 	
-	public Movement selectAnMovement(int id);
+	public Movement selectAnMovementById(int id);
 	
 	// public Boolean deleteMovement(Movement m);
 
